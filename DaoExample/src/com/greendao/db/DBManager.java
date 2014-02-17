@@ -19,7 +19,7 @@ public class DBManager {
 		
 		SQLiteDatabase.loadLibs(app.getApplicationContext());
 		
-		sDaoMaster = new DaoMaster(sDevOpenHelper.getWritableDatabase("123456"));
+		sDaoMaster = new DaoMaster(sDevOpenHelper.getWritableDatabase("secret-key"));
 	}
 
 	public static void destroy() {
