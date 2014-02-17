@@ -12,4 +12,11 @@ public class DApp extends Application {
 		
 		DBManager.init(this);
 	}
+	
+	@Override
+	public void onTerminate() {
+		
+		DBManager.destroy();
+		super.onTerminate();
+	}
 }

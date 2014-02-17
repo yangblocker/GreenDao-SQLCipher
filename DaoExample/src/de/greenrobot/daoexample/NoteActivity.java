@@ -42,10 +42,6 @@ public class NoteActivity extends ListActivity {
     private SQLiteDatabase db;
 
     private EditText editText;
-
-//    private DaoMaster daoMaster;
-//    private DaoSession daoSession;
-//    private NoteDao noteDao;
     private NoteEntityDao noteEntityDao;
     private Cursor cursor;
 
@@ -54,12 +50,6 @@ public class NoteActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        SQLiteDatabase.loadLibs(this);
-//        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "notes-db", null);
-//        db = helper.getWritableDatabase();
-//        daoMaster = new DaoMaster(db);
-//        daoSession = daoMaster.newSession();
-//        noteDao = daoSession.getNoteDao();
         noteEntityDao = new NoteEntityDao();
         db = noteEntityDao.getEntityDao().getDatabase();
         

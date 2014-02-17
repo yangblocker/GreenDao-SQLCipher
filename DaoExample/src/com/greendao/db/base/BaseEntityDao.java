@@ -9,7 +9,7 @@ import de.greenrobot.dao.query.WhereCondition;
 
 public abstract class BaseEntityDao<DAO extends AbstractDao<E, K>, E, K>{
 	public static final boolean DEBUG = true;
-	private DAO aDao;
+	private DAO mDao;
 	
 	private boolean forCurThread = false;
 	
@@ -21,7 +21,7 @@ public abstract class BaseEntityDao<DAO extends AbstractDao<E, K>, E, K>{
 	}
 	
 	public BaseEntityDao() {
-		aDao = initEntityDao();
+		mDao = initEntityDao();
 	}
 	
 	public void setForCurThread(boolean curThread) {
@@ -31,33 +31,33 @@ public abstract class BaseEntityDao<DAO extends AbstractDao<E, K>, E, K>{
 	protected abstract DAO initEntityDao();
 	
 	public DAO getEntityDao() {
-		return aDao;
+		return mDao;
 	}
 	
 	public void insertEntity(E entity) {
-		aDao.insert(entity);
+		mDao.insert(entity);
 	}
 	
 	public void deleteEntity(E entity) {
-		aDao.delete(entity);
+		mDao.delete(entity);
 	}
 	
 	public void deleteAll() {
-		aDao.deleteAll();
+		mDao.deleteAll();
 	}
 	
 	
 	public void deleteEntityByKey(K key) {
-		aDao.deleteByKey(key);
+		mDao.deleteByKey(key);
 	}
 	
 	
 	public List<E> queryEntitiesByKey(K key, boolean asc) {
-		QueryBuilder<E> qb = aDao.queryBuilder().where(aDao.getPkProperty().eq(key), (WhereCondition)null);
+		QueryBuilder<E> qb = mDao.queryBuilder().where(mDao.getPkProperty().eq(key), (WhereCondition)null);
 		if (asc) {
-			qb.orderAsc(aDao.getPkProperty());
+			qb.orderAsc(mDao.getPkProperty());
 		} else {
-			qb.orderDesc(aDao.getPkProperty());
+			qb.orderDesc(mDao.getPkProperty());
 		}
 		if (forCurThread) {
 			return qb.build().forCurrentThread().list();
@@ -67,7 +67,7 @@ public abstract class BaseEntityDao<DAO extends AbstractDao<E, K>, E, K>{
 	}
 	
 	public E queryEntityByKey(K key) {
-		QueryBuilder<E> qb = aDao.queryBuilder().where(aDao.getPkProperty().eq(key), (WhereCondition)null);
+		QueryBuilder<E> qb = mDao.queryBuilder().where(mDao.getPkProperty().eq(key), (WhereCondition)null);
 		if (forCurThread) {
 			return qb.build().forCurrentThread().unique();
 		}
@@ -77,18 +77,18 @@ public abstract class BaseEntityDao<DAO extends AbstractDao<E, K>, E, K>{
 	public List<E> queryEntitiesByArgs(WhereCondition ...whereCondition) {
 		if (whereCondition == null || whereCondition.length == 0) {
 			if (forCurThread) {
-				return aDao.queryBuilder().build().forCurrentThread().list();
+				return mDao.queryBuilder().build().forCurrentThread().list();
 			}
-			return aDao.queryBuilder().list();
+			return mDao.queryBuilder().list();
 		}
 		if (forCurThread) {
-			return aDao.queryBuilder().where(null, whereCondition).build().forCurrentThread().list();
+			return mDao.queryBuilder().where(null, whereCondition).build().forCurrentThread().list();
 		}
-		return aDao.queryBuilder().where(null, whereCondition).list();
+		return mDao.queryBuilder().where(null, whereCondition).list();
 	}
 	
-	public List<E> queryEntities(String where, String selectionArg) {
-		return aDao.queryRaw(where, selectionArg);
+	public List<E> queryEntities(String where, String... selectionArg) {
+		return mDao.queryRaw(where, selectionArg);
 	}
 
 }

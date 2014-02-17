@@ -1,16 +1,18 @@
 package de.greenrobot.daoexample;
 
+import net.sqlcipher.database.SQLiteDatabase;
 
 import java.util.Map;
 
-import net.sqlcipher.database.SQLiteDatabase;
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 import de.greenrobot.dao.internal.DaoConfig;
+
 import de.greenrobot.daoexample.Note;
 import de.greenrobot.daoexample.Customer;
 import de.greenrobot.daoexample.Order;
+
 import de.greenrobot.daoexample.NoteDao;
 import de.greenrobot.daoexample.CustomerDao;
 import de.greenrobot.daoexample.OrderDao;

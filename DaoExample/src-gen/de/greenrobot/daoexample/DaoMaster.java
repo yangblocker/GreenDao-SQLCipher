@@ -1,12 +1,13 @@
 package de.greenrobot.daoexample;
 
+import android.content.Context;
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteDatabase.CursorFactory;
 import net.sqlcipher.database.SQLiteOpenHelper;
-import android.content.Context;
 import android.util.Log;
 import de.greenrobot.dao.AbstractDaoMaster;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
+
 import de.greenrobot.daoexample.NoteDao;
 import de.greenrobot.daoexample.CustomerDao;
 import de.greenrobot.daoexample.OrderDao;
